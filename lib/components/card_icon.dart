@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
+import 'package:bmi_calculator/constants.dart';
 
 // Made TextStyle into its own const widget for easy referencing and updating when we reuse this widget.
 

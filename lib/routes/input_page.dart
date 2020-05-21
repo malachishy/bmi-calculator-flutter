@@ -1,15 +1,18 @@
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'card_icon.dart';
-import 'resuable_card.dart';
-import 'constants.dart';
-import 'round_icon_button.dart';
+import 'package:bmi_calculator/components/card_icon.dart';
+import 'package:bmi_calculator/components/resuable_card.dart';
+import 'package:bmi_calculator/constants.dart';
+import 'package:bmi_calculator/components/round_icon_button.dart';
+import 'package:bmi_calculator/components/bottom_button.dart';
 
 enum Gender {
   male,
   female,
 }
-
+int height = 69;
+int weight = 90;
 bool isCardActive;
 
 class InputPage extends StatefulWidget {
@@ -19,15 +22,17 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender genderInput;
-  double height = 180.0;
-  int weight = 90;
   int age = 18;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('BMI CALCULATOR')),
+        title: Center(
+          child: Text(
+            'BMI CALCULATOR',
+          ),
+        ),
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
@@ -41,6 +46,8 @@ class _InputPageState extends State<InputPage> {
                     onPress: () {
                       setState(() {
                         genderInput = Gender.male;
+                        weight = 170;
+                        height = 70;
                       });
                     },
                     color: genderInput == Gender.male
@@ -57,6 +64,8 @@ class _InputPageState extends State<InputPage> {
                     onPress: () {
                       setState(() {
                         genderInput = Gender.female;
+                        height = 63;
+                        weight = 130;
                       });
                     },
                     color: genderInput == Gender.female
@@ -83,7 +92,7 @@ class _InputPageState extends State<InputPage> {
                     textBaseline: TextBaseline.alphabetic,
                     children: <Widget>[
                       Text(height.toString(), style: kBoldTextStyle),
-                      Text(' cm', style: kLabelTextStyle),
+                      Text(' in', style: kLabelTextStyle),
                     ],
                   ),
                   SliderTheme(
@@ -95,13 +104,13 @@ class _InputPageState extends State<InputPage> {
                         thumbColor: kBottomContainerColor,
                         overlayColor: kBottomContainerColor.withAlpha(0x1f)),
                     child: Slider(
-                      value: height,
-                      min: 120.0,
-                      max: 220.0,
+                      value: height.toDouble(),
+                      min: 59.0,
+                      max: 79.0,
                       divisions: 101,
                       onChanged: (double heightInput) {
                         setState(() {
-                          height = heightInput.roundToDouble();
+                          height = heightInput.round();
                         });
                       },
                     ),
@@ -188,11 +197,14 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: kBottomContainerColor,
-            margin: EdgeInsets.only(top: 10),
-            width: double.infinity,
-            height: kBottomContainerHeight,
+          BottomButton(
+            buttonText: 'CALCULATE',
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                '/resultspage',
+              );
+            },
           ),
         ],
       ),
