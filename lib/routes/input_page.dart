@@ -6,6 +6,7 @@ import 'package:bmi_calculator/components/resuable_card.dart';
 import 'package:bmi_calculator/constants.dart';
 import 'package:bmi_calculator/components/round_icon_button.dart';
 import 'package:bmi_calculator/components/bottom_button.dart';
+import 'package:bmi_calculator/components/reusable_slider.dart';
 
 enum Gender {
   male,
@@ -95,26 +96,7 @@ class _InputPageState extends State<InputPage> {
                       Text(' in', style: kLabelTextStyle),
                     ],
                   ),
-                  SliderTheme(
-                    data: SliderTheme.of(context).copyWith(
-                        activeTrackColor: Colors.white,
-                        inactiveTrackColor: Color(0xFF8D8E98),
-                        thumbShape:
-                            RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                        thumbColor: kBottomContainerColor,
-                        overlayColor: kBottomContainerColor.withAlpha(0x1f)),
-                    child: Slider(
-                      value: height.toDouble(),
-                      min: 59.0,
-                      max: 79.0,
-                      divisions: 101,
-                      onChanged: (double heightInput) {
-                        setState(() {
-                          height = heightInput.round();
-                        });
-                      },
-                    ),
-                  )
+                  ReusableSlider()
                 ],
               ),
               color: kActiveCardColor,
@@ -176,3 +158,4 @@ class _InputPageState extends State<InputPage> {
     );
   }
 }
+
