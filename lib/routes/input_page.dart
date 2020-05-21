@@ -159,41 +159,6 @@ class _InputPageState extends State<InputPage> {
                     color: kActiveCardColor,
                   ),
                 ),
-                Expanded(
-                  child: ReusableCard(
-                    color: kActiveCardColor,
-                    cardChild: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Text('AGE', style: kLabelTextStyle),
-                          Text(
-                            age.toString(),
-                            style: kBoldTextStyle,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              RoundIconButton(
-                                icon: FontAwesomeIcons.minus,
-                                onPressed: () {
-                                  setState(() {
-                                    age -= 1;
-                                  });
-                                },
-                              ),
-                              RoundIconButton(
-                                icon: FontAwesomeIcons.plus,
-                                onPressed: () {
-                                  setState(() {
-                                    age += 1;
-                                  });
-                                },
-                              ),
-                            ],
-                          )
-                        ]),
-                  ),
-                ),
               ],
             ),
           ),
