@@ -125,27 +125,6 @@ class _InputPageState extends State<InputPage> {
                             weight.toString(),
                             style: kBoldTextStyle,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              RoundIconButton(
-                                icon: FontAwesomeIcons.minus,
-                                onPressed: () {
-                                  setState(() {
-                                    weight -= 1;
-                                  });
-                                },
-                              ),
-                              RoundIconButton(
-                                icon: FontAwesomeIcons.plus,
-                                onPressed: () {
-                                  setState(() {
-                                    weight += 1;
-                                  });
-                                },
-                              ),
-                            ],
-                          )
                         ]),
                     color: kActiveCardColor,
                   ),
