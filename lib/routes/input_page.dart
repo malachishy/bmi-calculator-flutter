@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi_calculator/components/card_icon.dart';
@@ -96,7 +95,17 @@ class _InputPageState extends State<InputPage> {
                       Text(' in', style: kLabelTextStyle),
                     ],
                   ),
-                  ReusableSlider()
+                  ReusableSlider(
+                      value: height,
+                      min: 59,
+                      max: 79,
+                      onChanged: (double sliderInput) {
+                        setState(
+                          () {
+                            height = sliderInput.round();
+                          },
+                        );
+                      })
                 ],
               ),
               color: kActiveCardColor,
@@ -158,4 +167,3 @@ class _InputPageState extends State<InputPage> {
     );
   }
 }
-
