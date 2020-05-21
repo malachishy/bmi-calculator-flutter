@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi_calculator/components/card_icon.dart';
 import 'package:bmi_calculator/components/resuable_card.dart';
 import 'package:bmi_calculator/constants.dart';
-import 'package:bmi_calculator/components/round_icon_button.dart';
 import 'package:bmi_calculator/components/bottom_button.dart';
 import 'package:bmi_calculator/components/reusable_slider.dart';
 
@@ -12,7 +11,7 @@ enum Gender {
   female,
 }
 int height = 69;
-int weight = 90;
+int weight = 150;
 bool isCardActive;
 
 class InputPage extends StatefulWidget {
@@ -99,7 +98,7 @@ class _InputPageState extends State<InputPage> {
                       value: height,
                       min: 59,
                       max: 79,
-                      onChanged: (double sliderInput) {
+                      onChanged: (sliderInput) {
                         setState(
                           () {
                             height = sliderInput.round();
@@ -121,10 +120,32 @@ class _InputPageState extends State<InputPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           Text('WEIGHT', style: kLabelTextStyle),
-                          Text(
-                            weight.toString(),
-                            style: kBoldTextStyle,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: <Widget>[
+                              Text(
+                                weight.toString(),
+                                style: kBoldTextStyle,
+                              ),
+                              Text(
+                                ' lbs',
+                                style: kLabelTextStyle,
+                              )
+                            ],
                           ),
+                          ReusableSlider(
+                              onChanged: (sliderInput) {
+                                setState(
+                                  () {
+                                    weight = sliderInput.round();
+                                  },
+                                );
+                              },
+                              min: 88,
+                              max: 353,
+                              value: weight)
                         ]),
                     color: kActiveCardColor,
                   ),
