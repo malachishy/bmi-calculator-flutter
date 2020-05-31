@@ -1,18 +1,17 @@
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi_calculator/components/card_icon.dart';
 import 'package:bmi_calculator/components/resuable_card.dart';
 import 'package:bmi_calculator/constants.dart';
-import 'package:bmi_calculator/components/round_icon_button.dart';
 import 'package:bmi_calculator/components/bottom_button.dart';
+import 'package:bmi_calculator/components/reusable_slider.dart';
 
 enum Gender {
   male,
   female,
 }
 int height = 69;
-int weight = 90;
+int weight = 150;
 bool isCardActive;
 
 class InputPage extends StatefulWidget {
@@ -95,26 +94,17 @@ class _InputPageState extends State<InputPage> {
                       Text(' in', style: kLabelTextStyle),
                     ],
                   ),
-                  SliderTheme(
-                    data: SliderTheme.of(context).copyWith(
-                        activeTrackColor: Colors.white,
-                        inactiveTrackColor: Color(0xFF8D8E98),
-                        thumbShape:
-                            RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                        thumbColor: kBottomContainerColor,
-                        overlayColor: kBottomContainerColor.withAlpha(0x1f)),
-                    child: Slider(
-                      value: height.toDouble(),
-                      min: 59.0,
-                      max: 79.0,
-                      divisions: 101,
-                      onChanged: (double heightInput) {
-                        setState(() {
-                          height = heightInput.round();
-                        });
-                      },
-                    ),
-                  )
+                  ReusableSlider(
+                      value: height,
+                      min: 59,
+                      max: 79,
+                      onChanged: (sliderInput) {
+                        setState(
+                          () {
+                            height = sliderInput.round();
+                          },
+                        );
+                      })
                 ],
               ),
               color: kActiveCardColor,
@@ -130,68 +120,34 @@ class _InputPageState extends State<InputPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           Text('WEIGHT', style: kLabelTextStyle),
-                          Text(
-                            weight.toString(),
-                            style: kBoldTextStyle,
-                          ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
                             children: <Widget>[
-                              RoundIconButton(
-                                icon: FontAwesomeIcons.minus,
-                                onPressed: () {
-                                  setState(() {
-                                    weight -= 1;
-                                  });
-                                },
+                              Text(
+                                weight.toString(),
+                                style: kBoldTextStyle,
                               ),
-                              RoundIconButton(
-                                icon: FontAwesomeIcons.plus,
-                                onPressed: () {
-                                  setState(() {
-                                    weight += 1;
-                                  });
-                                },
-                              ),
+                              Text(
+                                ' lbs',
+                                style: kLabelTextStyle,
+                              )
                             ],
-                          )
+                          ),
+                          ReusableSlider(
+                              onChanged: (sliderInput) {
+                                setState(
+                                  () {
+                                    weight = sliderInput.round();
+                                  },
+                                );
+                              },
+                              min: 88,
+                              max: 353,
+                              value: weight)
                         ]),
                     color: kActiveCardColor,
-                  ),
-                ),
-                Expanded(
-                  child: ReusableCard(
-                    color: kActiveCardColor,
-                    cardChild: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Text('AGE', style: kLabelTextStyle),
-                          Text(
-                            age.toString(),
-                            style: kBoldTextStyle,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              RoundIconButton(
-                                icon: FontAwesomeIcons.minus,
-                                onPressed: () {
-                                  setState(() {
-                                    age -= 1;
-                                  });
-                                },
-                              ),
-                              RoundIconButton(
-                                icon: FontAwesomeIcons.plus,
-                                onPressed: () {
-                                  setState(() {
-                                    age += 1;
-                                  });
-                                },
-                              ),
-                            ],
-                          )
-                        ]),
                   ),
                 ),
               ],
